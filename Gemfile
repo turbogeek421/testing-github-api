@@ -41,6 +41,8 @@ group :development, :test do
 
   # Creates fake (but reasonable) data that can be used during testing or development
   gem "faker", "~> 3.5.1"
+  # Autoload dotenv in Rails
+  gem "dotenv-rails", "~> 3.1.8"
 end
 
 group :development do

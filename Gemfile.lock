@@ -89,6 +89,10 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.6.2)
+    dotenv (3.1.8)
+    dotenv-rails (3.1.8)
+      dotenv (= 3.1.8)
+      railties (>= 6.1)
     drb (2.2.3)
     erb (5.0.2)
     erubi (1.13.1)
@@ -271,6 +275,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  dotenv-rails (~> 3.1.8)
   factory_bot_rails (~> 6.5.0)
   faker (~> 3.5.1)
   fuubar (~> 2.5.1)
