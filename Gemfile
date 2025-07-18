@@ -63,4 +63,6 @@ group :test do
   gem "fuubar", "~> 2.5.1"
   # A fixtures replacement with a straightforward definition syntax
   gem "factory_bot_rails", "~> 6.5.0"
+  # One-liners to test common Rails functionality
+  gem "shoulda-matchers", "~> 6.5.0"
 end

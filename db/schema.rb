@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_18_101237) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_18_102148) do
+  create_table "issues", id: :string, force: :cascade do |t|
+    t.integer "number"
+    t.string "title"
+    t.string "state"
+    t.text "body"
+    t.string "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", id: :string, force: :cascade do |t|
     t.string "login"
     t.string "avatar_url"

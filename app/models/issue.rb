@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class User < ApplicationRecord
+class Issue < ApplicationRecord
   before_create :assign_uuid_id
 
-  has_many :issues
+  belongs_to :user, optional: true
 end
