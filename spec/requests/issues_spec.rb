@@ -62,6 +62,18 @@ RSpec.describe "API::V1::Issues", type: :request do
           expect(data.pluck("number")).to_not include(issue2.number)
         end
       end
+
+      context "BUGFIX: maximum 100 records per page" do
+        before { 150.times { create(:issue) } }
+
+        let(:url) { "/v1/issues?per_page=150" }
+
+        it "response contains expected issue data" do
+          get url
+          data = JSON.parse(response.body)
+          expect(data.count).to eq(100)
+        end
+      end
     end
 
     context "custom headers" do

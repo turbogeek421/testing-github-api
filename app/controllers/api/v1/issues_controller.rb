@@ -7,7 +7,7 @@ class API::V1::IssuesController < ApplicationController
     @issues = paginate(
       fetch_issues,
       page: (params[:page] || 1),
-      per_page: (params[:per_page] || 50)
+      per_page:
     )
     render json: @issues
   end
@@ -30,5 +30,12 @@ class API::V1::IssuesController < ApplicationController
       return rel unless filter_state
 
       rel.where(state: filter_state)
+    end
+
+    def per_page
+      [
+        (Integer(params[:per_page], exception: false) || 50),
+        100
+      ].min
     end
 end
