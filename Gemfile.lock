@@ -77,6 +77,7 @@ GEM
       minitest (>= 5.1)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
+    api-pagination (6.0.0)
     ast (2.4.3)
     base64 (0.3.0)
     benchmark (0.4.1)
@@ -320,6 +321,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.15)
+  api-pagination (~> 6.0.0)
   bootsnap
   brakeman
   debug

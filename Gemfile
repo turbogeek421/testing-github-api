@@ -39,6 +39,9 @@ gem "kaminari", "~> 1.2.2"
 # ActiveModel::Serializers allows you to generate your JSON in an object-oriented and convention-driven manner.
 gem "active_model_serializers", "~> 0.10.15"
 
+# Link header pagination for Rails and Grape APIs
+gem "api-pagination", "~> 6.0.0"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

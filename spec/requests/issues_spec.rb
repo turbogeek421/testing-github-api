@@ -63,5 +63,11 @@ RSpec.describe "API::V1::Issues", type: :request do
         end
       end
     end
+
+    context "custom headers" do
+      it { expect(response.headers).to have_key("X-Issues-Total-Count") }
+      it { expect(response.headers).to have_key("X-Issues-Per-Page") }
+      it { expect(response.headers).to have_key("X-Issues-Page") }
+    end
   end
 end
