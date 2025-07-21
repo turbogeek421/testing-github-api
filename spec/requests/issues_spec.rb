@@ -69,5 +69,26 @@ RSpec.describe "API::V1::Issues", type: :request do
       it { expect(response.headers).to have_key("X-Issues-Per-Page") }
       it { expect(response.headers).to have_key("X-Issues-Page") }
     end
+
+    context "filtering" do
+      let(:issue1) { create(:issue, state: "open") }
+      let(:issue2) { create(:issue, state: "closed") }
+      let(:url) { "/v1/issues?state=open" }
+
+      it { expect(response).to have_http_status(:ok) }
+
+      it "response contains all issue data" do
+        data = JSON.parse(response.body)
+        expect(data.count).to eq(1)
+        expect(data.pluck("number")).to include(issue1.number)
+        expect(data.pluck("number")).to_not include(issue2.number)
+      end
+
+      context "if the given state is unknown" do
+        let(:url) { "/v1/issues?state=cancelled" }
+
+        it { expect(response).to have_http_status(:bad_request) }
+      end
+    end
   end
 end

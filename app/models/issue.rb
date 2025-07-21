@@ -4,4 +4,6 @@ class Issue < ApplicationRecord
   before_create :assign_uuid_id
 
   belongs_to :user, optional: true
+
+  EXPECTED_STATES = %w[open closed].freeze
 end
