@@ -18,9 +18,8 @@ RSpec.describe "API::V1::Issues", type: :request do
     it { expect(response).to have_http_status(:ok) }
 
     it "response contains all issue data" do
-      data = JSON.parse(response.body)
-      expect(data.count).to eq(2)
-      expect(data.pluck("number")).to include(issue1.number, issue2.number)
+      expect(response_data.count).to eq(2)
+      expect(response_data.pluck("number")).to include(issue1.number, issue2.number)
     end
 
     context "if no issues exist" do
@@ -35,8 +34,7 @@ RSpec.describe "API::V1::Issues", type: :request do
       let(:issue2) { nil }
 
       it "response contains issue user data" do
-        data = JSON.parse(response.body)
-        expect(data.pluck("user").first).to include("login" => issue1.user.login)
+        expect(response_data.pluck("user").first).to include("login" => issue1.user.login)
       end
     end
 
@@ -45,10 +43,9 @@ RSpec.describe "API::V1::Issues", type: :request do
         let(:url) { "/v1/issues?per_page=1" }
 
         it "response contains expected issue data" do
-          data = JSON.parse(response.body)
-          expect(data.count).to eq(1)
-          expect(data.pluck("number")).to include(issue2.number)
-          expect(data.pluck("number")).to_not include(issue1.number)
+          expect(response_data.count).to eq(1)
+          expect(response_data.pluck("number")).to include(issue2.number)
+          expect(response_data.pluck("number")).to_not include(issue1.number)
         end
       end
 
@@ -56,10 +53,9 @@ RSpec.describe "API::V1::Issues", type: :request do
         let(:url) { "/v1/issues?per_page=1&page=2" }
 
         it "response contains expected issue data" do
-          data = JSON.parse(response.body)
-          expect(data.count).to eq(1)
-          expect(data.pluck("number")).to include(issue1.number)
-          expect(data.pluck("number")).to_not include(issue2.number)
+          expect(response_data.count).to eq(1)
+          expect(response_data.pluck("number")).to include(issue1.number)
+          expect(response_data.pluck("number")).to_not include(issue2.number)
         end
       end
 
@@ -70,8 +66,7 @@ RSpec.describe "API::V1::Issues", type: :request do
 
         it "response contains expected issue data" do
           get url
-          data = JSON.parse(response.body)
-          expect(data.count).to eq(100)
+          expect(response_data.count).to eq(100)
         end
       end
     end
@@ -90,10 +85,9 @@ RSpec.describe "API::V1::Issues", type: :request do
       it { expect(response).to have_http_status(:ok) }
 
       it "response contains all issue data" do
-        data = JSON.parse(response.body)
-        expect(data.count).to eq(1)
-        expect(data.pluck("number")).to include(issue1.number)
-        expect(data.pluck("number")).to_not include(issue2.number)
+        expect(response_data.count).to eq(1)
+        expect(response_data.pluck("number")).to include(issue1.number)
+        expect(response_data.pluck("number")).to_not include(issue2.number)
       end
 
       context "if the given state is unknown" do
@@ -103,4 +97,9 @@ RSpec.describe "API::V1::Issues", type: :request do
       end
     end
   end
+
+  private
+    def response_data
+      @response_data ||= JSON.parse(response.body)
+    end
 end
