@@ -33,6 +33,12 @@ gem "bootsnap", require: false
 # https://github.com/flexirest/flexirest
 gem "flexirest", "~> 1.12.5"
 
+# Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 4+
+gem "kaminari", "~> 1.2.2"
+
+# ActiveModel::Serializers allows you to generate your JSON in an object-oriented and convention-driven manner.
+gem "active_model_serializers", "~> 0.10.15"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

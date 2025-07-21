@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   scope module: "api" do
     namespace :v1 do
       get "/ping" => "pings#index"
+
+      resources :issues, only: :index
     end
   end
 end
