@@ -15,13 +15,17 @@ RSpec.describe ImportGithubIssuesService do
     )
   }
   let(:github_issue_number) { 123 }
+  let(:github_created_at) { 30.days.ago.change(usec: 0) }
+  let(:github_updated_at) { 36.hours.ago.change(usec: 0) }
   let(:github_issue_data) {
     double("GithubIssueData",
       number: github_issue_number,
       title: "issue-title",
       body: "issue-body",
       state: "issue-state",
-      assignee: github_user_data
+      assignee: github_user_data,
+      created_at: github_created_at,
+      updated_at: github_updated_at
     )
   }
   let(:data_set) { double(items: [github_issue_data]) }
@@ -53,7 +57,12 @@ RSpec.describe ImportGithubIssuesService do
     #     - GitHub issue is assigned
     #     - GitHub issue is not assigned
     context "if an Issue record exists" do
-      let!(:issue) { create(:issue, number: github_issue_number) }
+      let!(:issue) {
+        create(:issue,
+               number: github_issue_number,
+               created_at: github_created_at,
+               updated_at: github_updated_at - 36.hours)
+      }
 
       it "does not create a new Issue record" do
         expect { subject.call }.to_not change(Issue, :count)
@@ -65,6 +74,8 @@ RSpec.describe ImportGithubIssuesService do
         expect(issue.title).to eq(github_issue_data.title)
         expect(issue.body).to eq(github_issue_data.body)
         expect(issue.state).to eq(github_issue_data.state)
+        # BUGFIX:
+        expect(issue.updated_at).to eq(github_updated_at)
       end
 
       context "if the Github Issue is assigned" do
@@ -145,6 +156,13 @@ RSpec.describe ImportGithubIssuesService do
     context "if an Issue record does not exist" do
       it "creates a new Issue record" do
         expect { subject.call }.to change(Issue, :count).by(1)
+      end
+
+      it "BUGFIX: sets the new records created_at and updated_at according to data received" do
+        subject.call
+        new_issue = most_recent_issue
+        expect(new_issue.created_at).to eq(github_created_at)
+        expect(new_issue.updated_at).to eq(github_updated_at)
       end
 
       context "if a record for the assigned User does not exist" do

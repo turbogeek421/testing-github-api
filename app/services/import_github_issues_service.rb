@@ -44,19 +44,15 @@ class ImportGithubIssuesService
       args = {
         title: data.title,
         body: data.body,
-        state: data.state
+        state: data.state,
+        updated_at: data.updated_at
       }
-      issue.update(args)
 
-      return if issue.user&.login == data.assignee&.login
-
-      unless data.assignee.present?
-        issue.update(user_id: nil)
-        return
+      if issue.user&.login != data.assignee&.login
+        args[:user_id] = data.assignee.present? ? fetch_user(data)&.id : nil
       end
 
-      user = fetch_user(data)
-      issue.update(user_id: user.id)
+      issue.update(args)
     end
 
     def fetch_user(data)
@@ -71,6 +67,14 @@ class ImportGithubIssuesService
 
     def create_issue(data)
       user = fetch_user(data)
-      Issue.create!(number: data.number, title: data.title, body: data.body, state: data.state, user:)
+      Issue.create!(
+        number: data.number,
+        title: data.title,
+        body: data.body,
+        state: data.state,
+        user:,
+        created_at: data.created_at,
+        updated_at: data.updated_at
+      )
     end
 end
