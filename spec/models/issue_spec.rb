@@ -23,6 +23,13 @@ RSpec.describe Issue, type: :model do
   end
 
   context "validation" do
-    skip "Validation handled by Github - this app is just storing a local copy of the data"
+    before do
+      skip "Validation handled by Github - this app is just storing a local copy of the data"
+    end
+
+    it { is_expected.to validate_presence_of(:number) }
+    it { is_expected.to validate_presence_of(:title) }
+
+    it { is_expected.to validate_inclusion_of(:state).in_array(described_class::EXPECTED_STATES) }
   end
 end
