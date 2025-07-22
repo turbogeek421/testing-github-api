@@ -42,6 +42,12 @@ gem "active_model_serializers", "~> 0.10.15"
 # Link header pagination for Rails and Grape APIs
 gem "api-pagination", "~> 6.0.0"
 
+# Use Redis as our Rails cache store
+gem "redis-rails", "~> 5.0.2"
+
+# For background execution
+gem "sidekiq", "~> 6.5.10"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

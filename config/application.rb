@@ -29,6 +29,13 @@ module TestingGithubApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.session_store :cookie_store, key: "_your_app_session"
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
+
+    # Use sidekiq as the queue adaptor
+    config.active_job.queue_adapter = :sidekiq
+
     config.x.github_api_url = "https://api.github.com"
   end
 end

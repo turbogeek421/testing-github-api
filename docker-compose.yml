@@ -1,12 +1,39 @@
+x-shared: &shared
+  depends_on:
+    - 'redis'
+  build:
+    context: ./
+    dockerfile: Dockerfile-dev
+  volumes:
+    - .:/usr/src/app
+  env_file:
+    - .env
+
 services:
   app:
-    build:
-      context: ./
-      dockerfile: Dockerfile-dev
+    <<: *shared
     ports:
       - "3000:3000"
-    volumes:
-      - .:/usr/src/app
-    env_file:
-      - .env
     command: rails s -b 0.0.0.0
+
+  redis:
+    image: bitnami/redis:6.2.4
+    environment:
+      REDIS_HOST: redis
+      REDIS_PASSWORD: $REDIS_PASSWORD
+    volumes:
+      - redis-data:/bitnami/redis/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  sidekiq:
+    <<: *shared
+    command: bundle exec sidekiq -q default
+    ports:
+      - "5678:5678"
+
+volumes:
+  redis-data:
