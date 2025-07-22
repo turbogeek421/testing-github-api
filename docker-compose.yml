@@ -35,5 +35,9 @@ services:
     ports:
       - "5678:5678"
 
+  clock:
+    <<: *shared
+    command: bundle exec clockwork lib/clock.rb
+
 volumes:
   redis-data:

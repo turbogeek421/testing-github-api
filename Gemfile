@@ -48,6 +48,9 @@ gem "redis-rails", "~> 5.0.2"
 # For background execution
 gem "sidekiq", "~> 6.5.10"
 
+# A scheduler process to replace cron, using a more flexible Ruby syntax running as a single long-running process.
+gem "clockwork", "~> 3.0.2"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
