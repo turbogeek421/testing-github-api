@@ -46,7 +46,7 @@ gem "api-pagination", "~> 6.0.0"
 gem "redis-rails", "~> 5.0.2"
 
 # For background execution
-gem "sidekiq", "~> 6.5.10"
+gem "sidekiq", "~> 8.0.6"
 
 # A scheduler process to replace cron, using a more flexible Ruby syntax running as a single long-running process.
 gem "clockwork", "~> 3.0.2"
