@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  before_create :assign_uuid_id
-
   has_many :issues
 
   # Validation should not be enforced as this model only stores data from Github, so it should
