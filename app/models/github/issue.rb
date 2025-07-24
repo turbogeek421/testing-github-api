@@ -7,7 +7,7 @@ class Github::Issue < Flexirest::Base
   before_request :set_headers
 
   get :updated_since,
-      "/repos/storyblok/storyblok/issues?state=all&sort=updated&since=:date&per_page=100&page=:page",
+      "/repos/turbogeek421/testing-github-api/issues?state=all&sort=updated&since=:date&per_page=100&page=:page",
       requires: %i[date page]
 
   private
