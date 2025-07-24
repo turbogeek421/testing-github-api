@@ -38,6 +38,23 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Creates fake (but reasonable) data that can be used during testing or development
+  gem "faker", "~> 3.5.1"
 end
 
+group :development do
+  # Static code analyzer and formatter
+  gem "rubocop", "~> 1.78.0", require: false
+  gem "rubocop-rails", "~> 2.32.0", require: false
+  gem "rubocop-rspec", "~> 3.6.0", require: false
+end
 
+group :test do
+  # RSpec testing framework as a drop-in alternative to Rails"s default testing framework, Minitest.
+  gem "rspec-rails", "~> 8.0.1"
+  # fuubar is an instafailing RSpec formatter that uses a progress bar instead of a string of letters and dots as feedback
+  gem "fuubar", "~> 2.5.1"
+  # A fixtures replacement with a straightforward definition syntax
+  gem "factory_bot_rails", "~> 6.5.0"
+end
