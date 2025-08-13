@@ -76,7 +76,7 @@ end
 
 group :test do
   # RSpec testing framework as a drop-in alternative to Rails"s default testing framework, Minitest.
-  gem "rspec-rails", "~> 8.0.1"
+  gem "rspec-rails", "~> 8.0.2"
   # fuubar is an instafailing RSpec formatter that uses a progress bar instead of a string of letters and dots as feedback
   gem "fuubar", "~> 2.5.1"
   # A fixtures replacement with a straightforward definition syntax
