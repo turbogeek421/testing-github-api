@@ -71,7 +71,7 @@ group :development do
   # Static code analyzer and formatter
   gem "rubocop", "~> 1.78.0", require: false
   gem "rubocop-rails", "~> 2.32.0", require: false
-  gem "rubocop-rspec", "~> 3.6.0", require: false
+  gem "rubocop-rspec", "~> 3.7.0", require: false
 end
 
 group :test do
