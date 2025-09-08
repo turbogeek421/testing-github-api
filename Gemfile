@@ -80,7 +80,7 @@ group :test do
   # fuubar is an instafailing RSpec formatter that uses a progress bar instead of a string of letters and dots as feedback
   gem "fuubar", "~> 2.5.1"
   # A fixtures replacement with a straightforward definition syntax
-  gem "factory_bot_rails", "~> 6.5.0"
+  gem "factory_bot_rails", "~> 6.5.1"
   # One-liners to test common Rails functionality
   gem "shoulda-matchers", "~> 6.5.0"
   # "time travel" and "time freezing" capabilities, to test time-dependent code
