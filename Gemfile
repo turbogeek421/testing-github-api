@@ -82,7 +82,7 @@ group :test do
   # A fixtures replacement with a straightforward definition syntax
   gem "factory_bot_rails", "~> 6.5.0"
   # One-liners to test common Rails functionality
-  gem "shoulda-matchers", "~> 6.5.0"
+  gem "shoulda-matchers", "~> 7.0.1"
   # "time travel" and "time freezing" capabilities, to test time-dependent code
   gem "timecop", "~> 0.9.10"
 end
